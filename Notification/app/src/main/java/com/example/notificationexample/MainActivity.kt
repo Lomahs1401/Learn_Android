@@ -24,18 +24,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.btnSendNotification.setOnClickListener {
-            sendNotification()
+        binding.btnSendNotification1.setOnClickListener {
+            sendNotification1()
+        }
+
+        binding.btnSendNotification2.setOnClickListener {
+            sendNotification2()
         }
     }
 
     @SuppressLint("MissingPermission")
-    private fun sendNotification() {
+    private fun sendNotification1() {
         val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
 
-        val notification = NotificationCompat.Builder(this, MyApplication.CHANNEL_ID)
-            .setContentTitle("Title push notification")
-            .setContentText("This is a push notification")
+        val notification = NotificationCompat.Builder(this, MyApplication.CHANNEL_ID_1)
+            .setContentTitle("Title push notification 1")
+            .setContentText("This is a push notification 1")
             .setSmallIcon(R.drawable.ic_music_play)
             .setLargeIcon(bitmap)
             .setColor(resources.getColor(R.color.purple_700))
@@ -47,6 +51,23 @@ class MainActivity : AppCompatActivity() {
 
         val notificationManagerCompat = NotificationManagerCompat.from(this)
         notificationManagerCompat.notify(getNotificationId(), notification)
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun sendNotification2() {
+        val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
+
+        val notification = NotificationCompat.Builder(this, MyApplication.CHANNEL_ID_2)
+            .setContentTitle("Title push notification 2")
+            .setContentText("This is a push notification 2")
+            .setSmallIcon(R.drawable.ic_music_play)
+            .setLargeIcon(bitmap)
+            .setColor(resources.getColor(R.color.purple_700))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.notify(getNotificationId(), notification)
     }
 
     private fun getNotificationId() = Date().time.toInt()

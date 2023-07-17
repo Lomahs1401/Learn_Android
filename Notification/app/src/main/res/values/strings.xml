@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">NotificationExample</string>
-    <string name="send_notification">Send Notification</string>
-    <string name="channel_name">Channel 1</string>
-    <string name="channel_description">This is channel 1</string>
-
+    <string name="send_notification_1">Send Notification 1</string>
+    <string name="send_notification_2">Send Notification 2</string>
+    <string name="channel_name_1">Channel 1</string>
+    <string name="channel_name_2">Channel 2</string>
+    <string name="channel_description_1">This is Channel 1</string>
+    <string name="channel_description_2">This is Channel 2</string>
 </resources>

@@ -22,4 +22,12 @@
         android:layout_marginTop="20dp"
         android:text="@string/send_notification_2" />
 
+    <Button
+        android:id="@+id/btn_custom_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_send_notification_2"
+        android:layout_marginTop="20dp"
+        android:text="@string/custom_notification" />
 </RelativeLayout>

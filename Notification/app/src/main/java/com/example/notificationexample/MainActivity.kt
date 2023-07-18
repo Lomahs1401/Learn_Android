@@ -8,6 +8,7 @@ import android.media.RingtoneManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.media.session.MediaSessionCompat
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -38,6 +39,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnCustomNotification.setOnClickListener {
             sendCustomNotification()
+        }
+
+        binding.btnPlayMusicNotification.setOnClickListener {
+            playMusicNotification()
         }
     }
 
@@ -115,7 +120,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Expanded
-        val notificationLayoutExpanded = RemoteViews(packageName, R.layout.layout_custom_notification_expanded).apply {
+        val notificationExpandedLayout = RemoteViews(packageName, R.layout.layout_custom_notification_expanded).apply {
             setTextViewText(R.id.tv_title_custom_notification_expanded, "Title Custom Notification Expanded")
             setTextViewText(R.id.tv_message_custom_notification_expanded, "Message Custom Notification Expanded")
             setImageViewResource(R.id.img_custom_notification_expanded, R.drawable.sad_anime_girl)
@@ -124,12 +129,44 @@ class MainActivity : AppCompatActivity() {
         val notificationExpanded = NotificationCompat.Builder(this, MyApplication.CHANNEL_ID_CUSTOM)
             .setSmallIcon(R.drawable.ic_music_play)
             .setCustomContentView(notificationCollapsedLayout)
-            .setCustomBigContentView(notificationLayoutExpanded)
+            .setCustomBigContentView(notificationExpandedLayout)
             .setSound(customSound)
             .build()
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(getNotificationId(), notificationExpanded)
+    }
+
+    private fun playMusicNotification() {
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.sad_anime_girl)
+        val customSound = Uri.parse("android.resource://" + packageName + "/" + R.raw.lilac)
+
+        // Create a MediaSessionCompat
+        val mediaSessionCompat = MediaSessionCompat(this, "Tag")
+
+        val notification = NotificationCompat.Builder(this, MyApplication.CHANNEL_ID_PLAY_MUSIC)
+            // Show controls on lock screen even when user hides sensitive content.
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setSmallIcon(R.drawable.ic_music_play)
+            .setSubText("Alpha")
+            .setContentTitle("Title of song")
+            .setContentText("Single of song")
+            .setLargeIcon(bitmap)
+            .setSound(customSound)
+            // Add media control buttons that invoke intents in your media service
+            .addAction(R.drawable.baseline_skip_previous_24, "Previous", null) // #0
+            .addAction(R.drawable.baseline_pause_24, "Pause", null) // #1
+            .addAction(R.drawable.baseline_skip_next_24, "Next", null) // #2
+            // Apply the media style template
+            .setStyle(androidx.media.app.NotificationCompat.MediaStyle()
+                .setShowActionsInCompactView(0)
+                .setShowActionsInCompactView(1 /* #1: pause button \*/)
+                .setShowActionsInCompactView(2)
+                .setMediaSession(mediaSessionCompat.sessionToken))
+            .build()
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.notify(getNotificationId(), notification)
     }
 
     private fun getNotificationId() = Date().time.toInt()

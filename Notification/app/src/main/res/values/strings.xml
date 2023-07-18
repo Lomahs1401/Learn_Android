@@ -7,14 +7,17 @@
     <string name="channel_name_medium">Channel Medium</string>
     <string name="channel_name_high">Channel High</string>
     <string name="channel_name_custom_notification">Channel Custom Notification</string>
+    <string name="channel_name_play_music">Channel Play Music</string>
     <string name="channel_description_low">This is Channel Low</string>
     <string name="channel_description_medium">This is Channel Medium</string>
     <string name="channel_description_high">This is Channel High</string>
     <string name="channel_description_custom_notification">This is Channel Custom Notification</string>
+    <string name="channel_description_play_music">This is Channel Play Music</string>
     <string name="custom_notification">Custom Notification</string>
     <string name="hello">Hello</string>
     <string name="time">12:23:24</string>
     <string name="go_to_list_product">Go to List Product</string>
     <string name="go_to_detail">Go To Detail</string>
     <string name="send_push_notification">Send Push Notification</string>
+    <string name="play_music_notification">Play Music Notification</string>
 </resources>

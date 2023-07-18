@@ -24,12 +24,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.btnSendNotification1.setOnClickListener {
-            sendNotification1()
+        binding.btnSendNotificationLow.setOnClickListener {
+            sendNotificationLow()
         }
 
-        binding.btnSendNotification2.setOnClickListener {
-            sendNotification2()
+        binding.btnSendNotificationMedium.setOnClickListener {
+            sendNotificationMedium()
+        }
+
+        binding.btnSendNotificationHigh.setOnClickListener {
+            sendNotificationHigh()
         }
 
         binding.btnCustomNotification.setOnClickListener {
@@ -38,11 +42,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("MissingPermission")
-    private fun sendNotification1() {
+    private fun sendNotificationLow() {
         val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
         val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
-        val notification = NotificationCompat.Builder(this, MyApplication.CHANNEL_ID_1)
+        val notification = NotificationCompat.Builder(this, MyApplication.CHANNEL_ID_LOW)
             .setContentTitle(TITLE_PUSH_NOTIFICATION)
             .setSmallIcon(R.drawable.ic_music_play)
             .setLargeIcon(bitmap)
@@ -59,18 +63,37 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("MissingPermission")
-    private fun sendNotification2() {
+    private fun sendNotificationMedium() {
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.sad_anime_girl)
-        val customSound = Uri.parse("android.resource://" + packageName + "/" + R.raw.sound_notification_custom)
+        val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
-        val notification = NotificationCompat.Builder(this, MyApplication.CHANNEL_ID_2)
-            .setContentTitle("Title push notification 2")
-            .setContentText("This is a push notification 2")
+        val notification = NotificationCompat.Builder(this, MyApplication.CHANNEL_ID_MEDIUM)
+            .setContentTitle("Title push notification Medium")
+            .setContentText("This is a push notification Medium")
             .setSmallIcon(R.drawable.ic_music_play)
             .setLargeIcon(bitmap)
             .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
             .setColor(resources.getColor(R.color.purple_700))
-            .setSound(customSound)
+            .setSound(uri)
+            .build()
+
+        val notificationManagerCompat = NotificationManagerCompat.from(this)
+        notificationManagerCompat.notify(getNotificationId(), notification)
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun sendNotificationHigh() {
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.sad_anime_girl)
+        val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val notification = NotificationCompat.Builder(this, MyApplication.CHANNEL_ID_HIGH)
+            .setContentTitle("Title push notification High")
+            .setContentText("This is a push notification High")
+            .setSmallIcon(R.drawable.ic_music_play)
+            .setLargeIcon(bitmap)
+            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
+            .setColor(resources.getColor(R.color.purple_700))
+            .setSound(uri)
             .build()
 
         val notificationManagerCompat = NotificationManagerCompat.from(this)

@@ -17,11 +17,14 @@
         <activity
             android:name=".DetailActivity"
             android:exported="false"
-            android:parentActivityName=".ListProductActivity"/>
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:excludeFromRecents="true"
+            android:parentActivityName=".ListProductActivity" />
         <activity
             android:name=".ListProductActivity"
             android:exported="false"
-            android:parentActivityName=".SecondActivity"/>
+            android:parentActivityName=".SecondActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />

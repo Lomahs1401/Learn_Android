@@ -41,6 +41,8 @@ class SecondActivity : AppCompatActivity() {
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.sad_anime_girl)
         val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
 
+        // --------------------------------- REGULAR ACTIVITY -----------------------------------
+
         // Create an Intent for the activity you want to start
         val resultIntent = Intent(this, DetailActivity::class.java)
         // Create the TaskStackBuilder
@@ -54,6 +56,16 @@ class SecondActivity : AppCompatActivity() {
             )
         }
 
+        // --------------------------------- SPECIAL ACTIVITY -----------------------------------
+
+        val notifyIntent = Intent(this, DetailActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val notifyPendingIntent = PendingIntent.getActivity(
+            this, getNotificationId(), notifyIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
         val notification = NotificationCompat.Builder(this, MyApplication.CHANNEL_ID_MEDIUM)
             .setContentTitle("Title push notification Medium")
             .setContentText("This is a push notification Medium")
@@ -62,7 +74,7 @@ class SecondActivity : AppCompatActivity() {
             .setStyle(NotificationCompat.BigPictureStyle().bigPicture(bitmap))
             .setColor(resources.getColor(R.color.purple_700))
             .setSound(uri)
-            .setContentIntent(resultPendingIntent)
+            .setContentIntent(notifyPendingIntent)
             .setAutoCancel(true)
             .build()
 

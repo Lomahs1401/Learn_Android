@@ -15,6 +15,6 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        supportActionBar?.title = "ListProductActivity"
+        supportActionBar?.title = "DetailActivity"
     }
 }

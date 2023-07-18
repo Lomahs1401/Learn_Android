@@ -21,28 +21,36 @@ class MyApplication : Application() {
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-            val customSound =
-                Uri.parse("android.resource://" + packageName + "/" + R.raw.sound_notification_custom)
-            val audioAttributes: AudioAttributes = AudioAttributes.Builder()
+            val customSound = Uri.parse("android.resource://" + packageName + "/" + R.raw.sound_notification_custom)
+            val audioAttributes = AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE)
                 .build()
 
-            // Config channel 1
-            val name1 = getString(R.string.channel_name_1)
-            val descriptionText1 = getString(R.string.channel_description_1)
-            val importance1 = NotificationManager.IMPORTANCE_MIN
-            val channel1 = NotificationChannel(CHANNEL_ID_1, name1, importance1).apply {
-                description = descriptionText1
+            // Config channel 1 (IMPORTANCE LOW)
+            val nameImportanceLow = getString(R.string.channel_name_low)
+            val descriptionTextImportanceLow = getString(R.string.channel_description_low)
+            val importanceLow = NotificationManager.IMPORTANCE_MIN
+            val channelLow = NotificationChannel(CHANNEL_ID_LOW, nameImportanceLow, importanceLow).apply {
+                description = descriptionTextImportanceLow
                 setSound(uri, audioAttributes)
             }
 
-            // Config channel 2
-            val name2 = getString(R.string.channel_name_2)
-            val descriptionText2 = getString(R.string.channel_description_2)
-            val importance2 = NotificationManager.IMPORTANCE_HIGH
-            val channel2 = NotificationChannel(CHANNEL_ID_2, name2, importance2).apply {
-                description = descriptionText2
-                setSound(customSound, audioAttributes)
+            // Config channel 2 (IMPORTANCE MEDIUM)
+            val nameImportanceMedium = getString(R.string.channel_name_medium)
+            val descriptionTextMedium = getString(R.string.channel_description_medium)
+            val importanceMedium = NotificationManager.IMPORTANCE_DEFAULT
+            val channelMedium = NotificationChannel(CHANNEL_ID_MEDIUM, nameImportanceMedium, importanceMedium).apply {
+                description = descriptionTextMedium
+                setSound(uri, audioAttributes)
+            }
+
+            // Config channel 3 (IMPORTANCE HIGH)
+            val nameImportanceHigh = getString(R.string.channel_name_high)
+            val descriptionTextHigh = getString(R.string.channel_description_high)
+            val importanceHigh = NotificationManager.IMPORTANCE_HIGH
+            val channelHigh = NotificationChannel(CHANNEL_ID_HIGH, nameImportanceHigh, importanceHigh).apply {
+                description = descriptionTextHigh
+                setSound(uri, audioAttributes)
             }
 
             // Config channel custom notification
@@ -62,15 +70,17 @@ class MyApplication : Application() {
             // Register the channel with the system
             val notificationManager: NotificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel1)
-            notificationManager.createNotificationChannel(channel2)
+            notificationManager.createNotificationChannel(channelLow)
+            notificationManager.createNotificationChannel(channelMedium)
+            notificationManager.createNotificationChannel(channelHigh)
             notificationManager.createNotificationChannel(channelCustomNotification)
         }
     }
 
     companion object {
-        const val CHANNEL_ID_1 = "CHANNEL_1"
-        const val CHANNEL_ID_2 = "CHANNEL_2"
+        const val CHANNEL_ID_LOW = "CHANNEL_LOW"
+        const val CHANNEL_ID_MEDIUM = "CHANNEL_MEDIUM"
+        const val CHANNEL_ID_HIGH = "CHANNEL_HIGH"
         const val CHANNEL_ID_CUSTOM = "CHANNEL_CUSTOM"
     }
 }

@@ -1,33 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/btn_send_notification_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/send_notification_1" />
-
-    <Button
-        android:id="@+id/btn_send_notification_2"
+        android:id="@+id/btn_send_notification_low"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/btn_send_notification_1"
+        android:layout_marginTop="200dp"
+        android:text="@string/send_notification_1" />
+
+    <Button
+        android:id="@+id/btn_send_notification_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn_send_notification_low"
         android:layout_marginTop="20dp"
         android:text="@string/send_notification_2" />
+
+    <Button
+        android:id="@+id/btn_send_notification_high"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/btn_send_notification_medium"
+        android:layout_marginTop="20dp"
+        android:text="@string/send_notification_3" />
 
     <Button
         android:id="@+id/btn_custom_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/btn_send_notification_2"
+        android:layout_below="@id/btn_send_notification_high"
         android:layout_marginTop="20dp"
         android:text="@string/custom_notification" />
 </RelativeLayout>

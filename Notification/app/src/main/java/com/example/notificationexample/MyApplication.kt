@@ -21,7 +21,9 @@ class MyApplication : Application() {
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-            val customSound = Uri.parse("android.resource://" + packageName + "/" + R.raw.sound_notification_custom)
+            val customSound =
+                Uri.parse("android.resource://" + packageName + "/" + R.raw.sound_notification_custom)
+            val music = Uri.parse("android.resource://" + packageName + "/" + R.raw.lilac)
             val audioAttributes = AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE)
                 .build()
@@ -55,16 +57,20 @@ class MyApplication : Application() {
 
             // Config channel custom notification
             val nameCustomNotification = getString(R.string.channel_name_custom_notification)
-            val descriptionCustomNotification =
-                getString(R.string.channel_description_custom_notification)
+            val descriptionCustomNotification = getString(R.string.channel_description_custom_notification)
             val importanceCustomNotification = NotificationManager.IMPORTANCE_HIGH
-            val channelCustomNotification = NotificationChannel(
-                CHANNEL_ID_CUSTOM,
-                nameCustomNotification,
-                importanceCustomNotification
-            ).apply {
+            val channelCustomNotification = NotificationChannel(CHANNEL_ID_CUSTOM, nameCustomNotification, importanceCustomNotification).apply {
                 description = descriptionCustomNotification
                 setSound(customSound, audioAttributes)
+            }
+
+            // Config channel custom notification
+            val namePlayMusic = getString(R.string.channel_name_play_music)
+            val descriptionPlayMusic = getString(R.string.channel_description_play_music)
+            val importancePlayMusic = NotificationManager.IMPORTANCE_HIGH
+            val channelPlayMusic = NotificationChannel(CHANNEL_ID_PLAY_MUSIC, namePlayMusic, importancePlayMusic).apply {
+                description = descriptionPlayMusic
+                setSound(music, audioAttributes)
             }
 
             // Register the channel with the system
@@ -74,6 +80,7 @@ class MyApplication : Application() {
             notificationManager.createNotificationChannel(channelMedium)
             notificationManager.createNotificationChannel(channelHigh)
             notificationManager.createNotificationChannel(channelCustomNotification)
+            notificationManager.createNotificationChannel(channelPlayMusic)
         }
     }
 
@@ -82,5 +89,6 @@ class MyApplication : Application() {
         const val CHANNEL_ID_MEDIUM = "CHANNEL_MEDIUM"
         const val CHANNEL_ID_HIGH = "CHANNEL_HIGH"
         const val CHANNEL_ID_CUSTOM = "CHANNEL_CUSTOM"
+        const val CHANNEL_ID_PLAY_MUSIC = "CHANNEL_PLAY_MUSIC"
     }
 }

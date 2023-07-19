@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    private var broadcastReceiver = object : BroadcastReceiver() {
+    private val broadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val bundle = intent?.extras ?: return
             song = bundle.get("object_song") as? Song
@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         binding.btnStopService.setOnClickListener {
             clickStopService()
         }
-
     }
 
     private fun clickStartService() {
@@ -77,7 +76,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showInfoSong() {
-
         song?.let {
             binding.imgSong.setImageResource(it.image)
             binding.tvTitleSong.text = it.title

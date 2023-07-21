@@ -9,8 +9,9 @@ import android.util.Log
 
 class MusicBoundService : Service() {
 
-    private var binder: MyBinder = MyBinder()
     private var mediaPlayer: MediaPlayer? = null
+    private var binder: MyBinder = MyBinder()
+
     inner class MyBinder : Binder() {
         fun getMusicBoundService(): MusicBoundService {
             return this@MusicBoundService
@@ -29,7 +30,10 @@ class MusicBoundService : Service() {
 
     override fun onUnbind(intent: Intent?): Boolean {
         Log.e("MusicBoundService", "onUnbind")
-        mediaPlayer?.release()
+        if (mediaPlayer != null) {
+            mediaPlayer?.release()
+            mediaPlayer = null
+        }
         return super.onUnbind(intent)
     }
 

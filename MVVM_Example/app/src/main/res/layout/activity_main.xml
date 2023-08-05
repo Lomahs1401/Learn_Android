@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="android.graphics.Color"/>
+        <variable
+            name="LoginViewModel"
+            type="com.example.mvvm_example.LoginViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:textSize="30sp"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="30dp"
+            android:text="@={LoginViewModel.email}"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:hint="@string/email"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_marginTop="30dp"
+            android:text="@={LoginViewModel.password}"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:hint="@string/password"
+            android:importantForAutofill="no" />
+
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@{LoginViewModel.messageLogin}"
+            android:textSize="18sp"
+            android:textColor="@{LoginViewModel.isSuccess ? Color.GREEN : Color.RED}"
+            android:visibility="@{LoginViewModel.isShowMessage ? View.VISIBLE : View.GONE}" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:textSize="20sp"
+            android:onClick="@{() -> LoginViewModel.onClickLogin()}"
+            android:background="@color/black"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+</layout>

@@ -2,4 +2,6 @@
     <string name="app_name">BoundService</string>
     <string name="start_bound_service">Start bound service</string>
     <string name="stop_bound_service">Stop Bound Service</string>
+    <string name="start_bound_service_messenger">Start Bound Service (Messenger)</string>
+    <string name="stop_bound_service_messenger">Stop Bound Service (Messenger)</string>
 </resources>

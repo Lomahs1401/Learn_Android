@@ -17,9 +17,11 @@ class MainActivity : AppCompatActivity() {
     private var musicBoundService = MusicBoundService()
     private var isServiceConnected = false
 
+    // Xác định callbacks cho service được bind tới, sẽ được truyền vào bindService()
     private var serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(componentName: ComponentName?, iBinder: IBinder?) {
-            val myBinder= iBinder as MusicBoundService.MyBinder
+            // Đã bind thành công tới MusicBoundService, cast IBinder và lấy MusicBoundService instance
+            val myBinder = iBinder as MusicBoundService.MyBinder
             musicBoundService = myBinder.getMusicBoundService()
             musicBoundService.startMusic()
             isServiceConnected = true

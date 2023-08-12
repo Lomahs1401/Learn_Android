@@ -52,4 +52,5 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
     implementation("androidx.cardview:cardview:1.0.0")
     implementation("de.hdodenhof:circleimageview:3.1.0")
+    implementation("se.emilsjolander:stickylistheaders:2.7.0")
 }

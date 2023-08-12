@@ -32,6 +32,9 @@
             android:exported="false" />
         <activity
             android:name=".DragAndDropActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StickyListHeadersListViewActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

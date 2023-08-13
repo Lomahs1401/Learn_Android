@@ -46,6 +46,9 @@
             android:exported="false" />
         <activity
             android:name=".InstagramLayoutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ExpandCollapseListViewActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -49,6 +49,9 @@
             android:exported="false" />
         <activity
             android:name=".ExpandCollapseListViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FoldingCellActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,14 +1,13 @@
 package com.example.recyclerviewexample
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.recyclerviewexample.adapter.UserAdapter
-import com.example.recyclerviewexample.databinding.ActivityStickyListHeadersListViewBinding
+import com.example.recyclerviewexample.databinding.ActivityExpandCollapseStickyListHeaderListViewBinding
 
-class StickyListHeadersListViewActivity : AppCompatActivity() {
-    private val binding: ActivityStickyListHeadersListViewBinding by lazy {
-        ActivityStickyListHeadersListViewBinding.inflate(layoutInflater)
+class ExpandCollapseStickyListHeaderListViewActivity : AppCompatActivity() {
+    private val binding: ActivityExpandCollapseStickyListHeaderListViewBinding by lazy {
+        ActivityExpandCollapseStickyListHeaderListViewBinding.inflate(layoutInflater)
     }
 
     private val userAdapter: UserAdapter by lazy {
@@ -20,11 +19,13 @@ class StickyListHeadersListViewActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         userAdapter.setData(getListUser())
-        binding.listUser.adapter = userAdapter
+        binding.listExpandable.setAdapter(userAdapter)
 
-        binding.btnNextActivity.setOnClickListener {
-            Intent(this, ExpandCollapseStickyListHeaderListViewActivity::class.java).run {
-                startActivity(this)
+        binding.listExpandable.setOnHeaderClickListener { l, header, itemPosition, headerId, currentlySticky ->
+            if (binding.listExpandable.isHeaderCollapsed(headerId)) {
+                binding.listExpandable.expand(headerId)
+            } else {
+                binding.listExpandable.collapse(headerId)
             }
         }
     }
